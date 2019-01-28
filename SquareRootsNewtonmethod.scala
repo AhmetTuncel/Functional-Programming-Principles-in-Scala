@@ -11,7 +11,6 @@ def improve(guess:Double, x: Double) =
   (guess + x / guess) / 2
 
 def sqrt(x: Double) = sqrtIter(1.0,x)
-Example: square roots with Newton's method
 
 sqrt(2)
 sqrt(4)
