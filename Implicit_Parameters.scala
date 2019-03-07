@@ -1,7 +1,8 @@
 package week5
+import math.Ordering
 
 object mergesort {
-  def msort[T](xs: List[T])(lt: (T,T) => Boolean): List[T] = {
+  def msort[T](xs: List[T])(ord: Ordering[T]): List[T] = {
     val n = xs.length / 2
     if (n == 0) xs
     else {
@@ -9,19 +10,19 @@ object mergesort {
         case (Nil, ys) => ys
         case (xs, Nil) => xs
         case (x :: xs1, y :: ys1) =>
-          if (lt(x,y)) x :: merge(xs1,ys)
+          if (ord.lt(x,y)) x :: merge(xs1,ys)
           else y :: merge(xs,ys1)
       }
 
       val (fst, snd) = xs splitAt n
-      merge(msort(fst)(lt), msort(snd)(lt))
+      merge(msort(fst)(ord), msort(snd)(ord))
     }
   }
   val nums = List(2,-4,5,7,1)
   val fruits = List("apple", "pineapple", "orange", "banana")
 
-  msort(nums)((x: Int, y:Int) => x < y)
-  msort(fruits)((x: String, y: String) => x.compareTo(y) < 0)
+  msort(nums)(Ordering.Int)
+  msort(fruits)(Ordering.String)
 
 }
 
